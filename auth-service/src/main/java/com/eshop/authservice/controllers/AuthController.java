@@ -13,11 +13,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth-service")
+@RequestMapping("/")
 public class AuthController {
+    private AuthService authService;
+    private Environment environment;
     @Autowired
-    private AuthServiceImpl authService;
-
+    public AuthController(AuthService authService, Environment environment){
+        this.authService = authService;
+        this.environment = environment;
+    }
+    @GetMapping("/health_check")
+    public String status() {
+        return String.format(
+                "It's working in Auth Service"
+                        + ", port(local.server.port) =" + environment.getProperty("local.server.port")
+                        + ", port(server.port) =" + environment.getProperty("server.port")
+                        + ", token secret = " + environment.getProperty("token.secret")
+                        + ", token expiration time = " + environment.getProperty("token.exp_time")
+        );
+    }
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RequestRegister user){
         UserDto userDto = authService.registerUser(UserDto.builder()

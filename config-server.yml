@@ -1,6 +1,6 @@
 token:
     exp_time: 4320000
-    secret: user_token
+    secret: user_token_edited
 
 gateway:
     ip: 127.0.0.1 

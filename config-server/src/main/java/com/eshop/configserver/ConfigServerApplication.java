@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
 @EnableConfigServer
+@RestController
 public class ConfigServerApplication {
-    @RequestMapping("/")
-    public String home() {
-        return "This is config server";
-    }
-    public static void main(String[] args) {
-        SpringApplication.run(ConfigServerApplication.class, args);
-    }
+	@RequestMapping("/")
+	public String checkConfigServer(){
+		return "This is config server";
+	}
+	public static void main(String[] args) {
+		SpringApplication.run(ConfigServerApplication.class, args);
+	}
 
 }

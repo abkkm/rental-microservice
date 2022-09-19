@@ -1,3 +1,4 @@
+
 server:
   port: ${port:8888}
 
@@ -9,4 +10,16 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/tranphuc269/rental_server_config
+          uri: https://github.com/tranphuc269/rental-microservice
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, busrefresh

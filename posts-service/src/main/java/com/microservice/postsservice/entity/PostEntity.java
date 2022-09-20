@@ -37,6 +37,9 @@ public class PostEntity {
     private String title;
 
     @Column(nullable = false)
+    private String keyword;
+
+    @Column(nullable = false)
     private String content;
 
     @Column(nullable = true)
@@ -103,7 +106,9 @@ public class PostEntity {
             image.setPost(this);
         }
     }
-
+    public void addKeyword(String keyword){
+        this.keyword = keyword;
+    }
     public void addComment(CommentEntity comment) {
         this.comments.add(comment);
 

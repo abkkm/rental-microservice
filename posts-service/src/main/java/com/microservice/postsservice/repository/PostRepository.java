@@ -15,15 +15,13 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
     PostEntity findPostById(Long id);
 
     @Query(
-            value="SELECT * " +
-                    "FROM posts " +
-                    "LIKE '%' + :keyword + '%' ",
-            nativeQuery = true
-    )
+            value = "SELECT *" +
+                    "FROM posts p " +
+                    " WHERE LOWER(p.keyword) LIKE LOWER(CONCAT('%', ?1,'%'))", nativeQuery = true)
     Iterable<PostEntity> findByKeywordLike(String keyword);
 
     @Query(
-            value="SELECT * " +
+            value = "SELECT * " +
                     "FROM posts p " +
                     "WHERE p.category = :category " +
                     "NOT IN(:exceptList.get(0), :exceptList().get(1))",

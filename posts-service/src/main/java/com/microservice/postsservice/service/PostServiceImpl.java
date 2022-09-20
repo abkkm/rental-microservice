@@ -49,6 +49,9 @@ public class PostServiceImpl implements PostService {
                 .status(postDto.getStatus())
                 .build();
         List<ImageEntity> images = FileFormat.parseFileInfo(postDto.getMultipartFiles(), post);
+        post.addKeyword(postDto.getTitle().toLowerCase()
+                + " " + postDto.getContent().toLowerCase()
+                + " " + postDto.getWriter().toLowerCase());
         postRepository.save(post);
         if (!images.isEmpty()) {
             for (ImageEntity image : images

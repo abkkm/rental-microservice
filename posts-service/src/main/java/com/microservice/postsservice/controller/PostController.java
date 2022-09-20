@@ -109,6 +109,7 @@ public class PostController {
     @GetMapping("/post/{id}")
     public ResponseEntity<?> getPostById(@PathVariable("id") Long id) throws Exception {
         try {
+            System.out.println("id : " + id);
             PostDto postDto = postService.readPostById(id).get();
             return ResponseEntity.status(HttpStatus.OK).body(ResponsePost
                     .builder()
@@ -132,7 +133,7 @@ public class PostController {
     }
 
 
-    @GetMapping("/post/{status}")
+    @GetMapping("/posts/{status}")
     public ResponseEntity<?> getPostByStatus(@PathVariable("status") String status) throws Exception {
         try {
             Iterable<PostDto> postDtoList = postService.getAllPostsByStatus(status);
@@ -223,30 +224,26 @@ public class PostController {
 
     @GetMapping("/posts/keyword/{keyword}")
     public ResponseEntity<?> getPostsByKeyword(@PathVariable("keyword") String keyword) throws Exception {
-        try {
-            Iterable<PostDto> postDtos = postService.getPostsByKeyword(keyword);
-            List<ResponsePost> responsePosts = new ArrayList<>();
-            postDtos.forEach(postDto -> {
-                responsePosts.add(ResponsePost.builder()
-                        .id(postDto.getId())
-                        .postType(postDto.getPostType())
-                        .title(postDto.getTitle())
-                        .content(postDto.getContent())
-                        .rentalPrice(postDto.getRentalPrice())
-                        .startDate(postDto.getStartDate())
-                        .endDate(postDto.getEndDate())
-                        .createdDate(postDto.getCreatedDate())
-                        .writer(postDto.getWriter())
-                        .userId(postDto.getUserId())
-                        .status(postDto.getStatus())
-                        .images(postDto.getImages())
-                        .comments(postDto.getComments())
-                        .build());
-            });
-            return ResponseEntity.status(HttpStatus.OK).body(responsePosts);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+        Iterable<PostDto> postDtos = postService.getPostsByKeyword(keyword);
+        List<ResponsePost> responsePosts = new ArrayList<>();
+        postDtos.forEach(postDto -> {
+            responsePosts.add(ResponsePost.builder()
+                    .id(postDto.getId())
+                    .postType(postDto.getPostType())
+                    .title(postDto.getTitle())
+                    .content(postDto.getContent())
+                    .rentalPrice(postDto.getRentalPrice())
+                    .startDate(postDto.getStartDate())
+                    .endDate(postDto.getEndDate())
+                    .createdDate(postDto.getCreatedDate())
+                    .writer(postDto.getWriter())
+                    .userId(postDto.getUserId())
+                    .status(postDto.getStatus())
+                    .images(postDto.getImages())
+                    .comments(postDto.getComments())
+                    .build());
+        });
+        return ResponseEntity.status(HttpStatus.OK).body(responsePosts);
     }
 
     @GetMapping("/posts/category/{category}")

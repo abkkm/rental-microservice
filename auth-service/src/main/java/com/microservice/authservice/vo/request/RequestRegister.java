@@ -1,4 +1,4 @@
-package com.microservice.authservice.vo;
+package com.microservice.authservice.vo.request;
 
 import lombok.Getter;
 

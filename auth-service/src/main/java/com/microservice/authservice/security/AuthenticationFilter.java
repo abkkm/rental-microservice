@@ -3,7 +3,7 @@ package com.microservice.authservice.security;
 
 import com.microservice.authservice.dto.UserDto;
 import com.microservice.authservice.service.AuthService;
-import com.microservice.authservice.vo.RequestLogin;
+import com.microservice.authservice.vo.request.RequestLogin;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.core.env.Environment;

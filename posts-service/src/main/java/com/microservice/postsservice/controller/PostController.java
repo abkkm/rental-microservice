@@ -1,24 +1,22 @@
 package com.microservice.postsservice.controller;
 
-
 import com.microservice.postsservice.dto.CommentDto;
 import com.microservice.postsservice.dto.PostDto;
 import com.microservice.postsservice.helper.DateFormat;
 import com.microservice.postsservice.helper.PostStatus;
 import com.microservice.postsservice.helper.PostType;
-import com.microservice.postsservice.repository.PostRepository;
-import com.microservice.postsservice.service.CommentService;
-import com.microservice.postsservice.service.ImageService;
-import com.microservice.postsservice.service.PostService;
+import com.microservice.postsservice.message.KafkaProducerMessage;
+import com.microservice.postsservice.service.*;
 import com.microservice.postsservice.vo.RequestCreateComment;
 import com.microservice.postsservice.vo.RequestPost;
+import com.microservice.postsservice.vo.RequestRental;
 import com.microservice.postsservice.vo.ResponsePost;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,23 +24,28 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/")
+@Slf4j
 public class PostController {
     private PostService postService;
     private CommentService commentService;
     private ImageService imageService;
     private Environment env;
 
+    private KafkaProducerMessage kafkaProducer;
+
     @Autowired
     public PostController(
             PostService postService,
             CommentService commentService,
             ImageService imageService,
-            Environment env
+            Environment env,
+            KafkaProducerMessage kafkaProducer
     ) {
         this.postService = postService;
         this.commentService = commentService;
         this.imageService = imageService;
         this.env = env;
+        this.kafkaProducer = kafkaProducer;
     }
 
     @GetMapping("/health_check")
@@ -274,16 +277,16 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-//    @PostMapping("/rental")
-//    public ResponseEntity<?> rental(@RequestBody RequestRental postVo) {
-//        log.info("Post Service's Controller Layer :: Call rental Method!");
-//
-//        kafkaProducer.send("rental-topic", postVo);
-//
-//        postService.rental(postVo.getPostId());
-//
-//        return ResponseEntity.status(HttpStatus.OK).body("Success rental");
-//    }
+    @PostMapping("/rental")
+    public ResponseEntity<?> rental(@RequestBody RequestRental postVo) {
+        log.info("Post Service's Controller Layer :: Call rental Method!");
+
+        kafkaProducer.send("rental-topic", postVo);
+
+        postService.rental(postVo.getPostId());
+
+        return ResponseEntity.status(HttpStatus.OK).body("Success rental");
+    }
 
     @PostMapping("/{id}/delete")
     public ResponseEntity<?> deletePost(@PathVariable("id") Long id) {

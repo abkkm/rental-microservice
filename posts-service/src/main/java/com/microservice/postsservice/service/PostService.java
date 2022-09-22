@@ -1,5 +1,6 @@
 package com.microservice.postsservice.service;
 
+import com.microservice.postsservice.*;
 import com.microservice.postsservice.dto.PostDto;
 import org.springframework.stereotype.Service;
 

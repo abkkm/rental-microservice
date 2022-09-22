@@ -1,5 +1,4 @@
 package com.microservice.postsservice.dto;
-
 import com.microservice.postsservice.entity.CommentEntity;
 import com.microservice.postsservice.entity.ImageEntity;
 import lombok.Builder;

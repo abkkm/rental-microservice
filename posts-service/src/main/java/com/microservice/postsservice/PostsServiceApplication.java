@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PostsServiceApplication {
 
-	@GetMapping("/post-service/status")
+	@GetMapping("/posts-service/status")
 	public String status(){
-		return "This is post-service";
+		return "This is posts-service";
 	}
 
 	public static void main(String[] args) {

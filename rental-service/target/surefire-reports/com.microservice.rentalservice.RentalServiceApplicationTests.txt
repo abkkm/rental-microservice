@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.microservice.rentalservice.RentalServiceApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.771 s - in com.microservice.rentalservice.RentalServiceApplicationTests

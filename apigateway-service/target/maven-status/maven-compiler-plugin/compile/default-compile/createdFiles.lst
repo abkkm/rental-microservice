@@ -1,0 +1,8 @@
+com/microservice/apigatewayservice/filter/GlobalFilter.class
+com/microservice/apigatewayservice/filter/CustomFilter$Config.class
+com/microservice/apigatewayservice/filter/CustomFilter.class
+com/microservice/apigatewayservice/filter/AuthorizationHeaderFilter.class
+com/microservice/apigatewayservice/ApigatewayServiceApplication.class
+com/microservice/apigatewayservice/filter/LoggingFilter$Config.class
+com/microservice/apigatewayservice/filter/GlobalFilter$Config.class
+com/microservice/apigatewayservice/filter/LoggingFilter.class

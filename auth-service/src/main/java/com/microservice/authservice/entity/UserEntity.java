@@ -3,10 +3,7 @@ package com.microservice.authservice.entity;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Generated;
-
 import javax.persistence.*;
-import java.util.Date;
 
 @Data
 @Entity

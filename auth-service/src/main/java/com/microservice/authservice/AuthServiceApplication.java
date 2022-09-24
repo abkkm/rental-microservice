@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-@EnableZipkinServer
 public class AuthServiceApplication {
 
     public static void main(String[] args) {
